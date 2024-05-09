@@ -7,6 +7,7 @@ class PlayerInput : ScriptableObject
     [Header("Movement Keys")]
     public KeyCode Left;
     public KeyCode Right;
+    public KeyCode Jump;
 
     [Header("Action Keys")]
     public KeyCode SpecialAction;

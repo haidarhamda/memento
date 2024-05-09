@@ -21,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
 
     private Camera mainCamera;
 
+    [SerializeField] public float jumpForce = 10f;
+    private bool isJumping = false;
+    [SerializeField] public ParticleSystem jumpEffect;
+
     private void Awake()
     {
         lookDirection = transform.rotation.y == 0 ? RIGHT : LEFT;
@@ -63,6 +67,10 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 newPosition = transform.position + appliedMove;
         newPosition.x = Mathf.Clamp(newPosition.x, leftBoundary + transform.localScale.x / 2, rightBoundary - transform.localScale.x / 2);
+        if (Input.GetKeyDown(playerInput.Jump) && !isJumping)
+        {
+            Jump();
+        }
         if (bufferMove ==newPosition)
         {
             animator.SetBool("isRunning", false);
@@ -75,5 +83,25 @@ public class PlayerMovement : MonoBehaviour
 
         move = newPosition;
 
+    }
+
+    void Jump()
+    {
+        GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        animator.SetBool("isJumping", true);
+        isJumping = true;
+        if (jumpEffect != null)
+        {
+            jumpEffect.Play();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            animator.SetBool("isJumping", false);
+            isJumping = false;
+        }
     }
 }
