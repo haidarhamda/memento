@@ -4,6 +4,10 @@ Game dengan objektif menghindari blok dan menangkap gem/cherry
 Efek api saat jump
 ![img2](./doc/ss2.png)
 
+
+https://github.com/haidarhamda/memento/assets/89732397/cc51f571-a312-4fa0-8fe9-23b986ed8289
+
+
 ## Cara Bermain
 Control: \
 Kiri: A \
